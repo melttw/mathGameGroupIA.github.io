@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html   lang = "en">
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "stylesheetWPGroupProj.css" >
+        <title>Multiplcation Game</title>
+        <link rel="icon" type="image/ico" href="Images/favicon.ico">
+
+    </head>
+
+    <body>
+
+        <form name="mathGame" id = "mathForm" action = "post" method  = "post" onsubmit= "return register()">
+            <h2 style = "color:white; font-family: sans-serif;" class = "legend"> Math Game Registration </h2>
+            <div class="form-control">
+
+                <input type="text" id="fn" maxlength="20" minlength="3" placeholder="First Name...">
+            </div>
+            <br>
+            <div class="form-control">
+
+                <input type="text" id="ln" maxlength="20" minlength="3" placeholder="Last Name...">
+            </div>
+            <br>
+            <div class="form-control">
+
+                <input type="text" id="dob" min ="2009-01-01" max= "2013-12-31" placeholder="Date of Birth..."  onfocus="(this.type='date')">
+
+            </div>
+            <br>
+            <div class="form-control">
+
+                <input onclick= "calculateAge()" type="text" id="a" placeholder="Age..." autocomplete = "off">
+            </div>
+            <br>
+            <div class="form-control">
+                <input type="text" id="gd" placeholder="Gender...">
+            </div>
+            <br>
+            <div class="form-control">
+
+                <input type="email" id="email" pattern=^[A-Za-z0-9._%+-]+@gmail.com$  placeholder="Someone@gmail.com..." >
+            </div>
+            <br>
+            <input type="submit" id="Register" class = "buttons1"  value = "Register">
+            <a href = "#game"> <input type="button" id="Start" class = "buttons1" onclick="PlayGame()" value = "Start" disabled></a>
+
+            <br><br><br><br>
+
+
+            <h2 style = "color:white; font-family: sans-serif;"> MULTIPLICATION GAME </h2>
+            <br> <a name = "game"><br></a>
+
+            <input type="text" id="num1" class = "kidInput" onclick="PlayGame()" disabled>
+            <h4 style = "color:white; font-family: sans-serif;">x</h4>
+            <input type="text" id="num2" class = "kidInput" onclick= "PlayGame()" disabled>
+            <h4 style = "color:white; font-family: sans-serif;">=</h4>
+            <input type="text" id="answer" class = "kidInput" disabled autocomplete = "off" >
+
+            <br><br>
+
+            <input type="button" id="Accept" onclick="CheckAnswer()" class = "buttons2" value = "Accept" disabled>
+            <input type="button" id="Next" onclick="PlayGame()" class = "buttons2" value = "Next" disabled>
+            <input type="button" id ="end" onclick="findPercentageScore();" class = "buttons2" value = "End" disabled>
+
+            <br><br><br><br><br><br><br><br>
+
+
+
+            <h3 style = "color:white; font-family: sans-serif;"> RESULTS </h3>
+            <textarea id="showpercentage" rows="5" cols="33" style="width:400px; height:150px;" disabled class = "textArea"></textarea>
+            <br><br><br>
+            <h3 style = "color:white; font-family: sans-serif;"> SHOW ALL PLAYERS </h3>
+            <textarea id="showAllPlayers" rows="5" cols="33" style="width:400px; height:150px;" disabled class = "textArea"></textarea>
+
+
+        </form>
+
+        <br>  <br>  <br>
+
+         <script src="WPgroupPrj.js"></script>
+    </body>
+</html>
