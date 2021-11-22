@@ -1,11 +1,27 @@
 let totalQuestions = 0;
 let correctAnswers = 0;
 let wrongAnswers = 0;
+var f_size=100;
+  var m_size=100;
+const playersdata=[];
+
+var cnt=0;
+          windows.onload = function showfreq() {
+            setinterval(function(){
 
 
-let playersdata=[
+          //var m_gen = document.getElementById("Male");
+          //var f_gen = document.getElementById("Female");
+          var first = document.getElementById("First");
+          var second = document.getElementById("Second");
+          first.innerHTML = "<img src='blue.jpg' id='Male' width=40>";
+          document.getElementById("Male").height=m_size;
+          second.innerHTML = "<img src='pink.jpg' id='Female' width=40>"
+          document.getElementById("Female").height=f_size;
 
-      ]
+        }, 5000);
+      }
+
              function calculateAge(){
                 var dateInput = document.getElementById("dob").value;
                 var DateOB = new Date(dateInput);
@@ -18,37 +34,19 @@ let playersdata=[
             }//End calculateAge
 
 
-            //Task 11   // function is use to disable the play and result button
-            function disable()
-            {
-                document.getElementById("Start").disabled = true;
-                document.getElementById("Accept").disabled = true;
-                document.getElementById("Next").disabled = true;
-                // use to clear the form data and enable input
-                document.getElementById("mathGame").reset();
-            }//End disable
-
 // Task 10
             function findPercentageScore() {
-                let ln = document.getElementById('ln').value;
-                let fn = document.getElementById('fn').value;
+                let ln = playersdata[cnt-1].lastname.value;
+                let fn = playersdata[cnt-1].firstname.value;
                 // display current date
-
                 const date = new Date();
                 const n = date.toDateString();
-                var correct = correctAnswers ;
-                var amount = totalQuestions;
-                var percentage;
-                
-                if (amount == 0){
-                  percentage = 0;
-                }else{
-                  percentage = Math.round((correct/ amount) * 100);
-                }
-
+                var correct = playersdata[cnt-1].CorrectAnswers;
+                var amount = playersdata[cnt-1].TotalQuestions;
+                var percentage = (correct/ amount) * 100 ;
                 // use to display the data into the textarea
-                document.getElementById("showpercentage").value= "Name: " + fn +" "+ln+"\n"+"Date: "
-                 + n +"\n"+"Number Of Questions: " +amount+"\n"+"Number Of Correct Answer: "+correct+ "\n"+"The Percentage Score: " +percentage+"%";
+                document.getElementById("showpercentage").value= "Name: " + fn +" "+ln+"\n"+"Date : "
+                 + n +"\n"+"Number of questions:" +amount+"\n"+"Number of correct answer: "+correct+ "\n"+"The percentage score: " +percentage+"%";
 
                  //Used to enable inputs,
                  document.getElementById("fn").disabled = false;
@@ -58,13 +56,10 @@ let playersdata=[
                  document.getElementById("gd").disabled = false;
                  document.getElementById("email").disabled = false;
 
-                 // Used to disable all buttons
+                // Used to disable all buttons
                  document.getElementById("Start").disabled = true;
                  document.getElementById("Accept").disabled = true;
                  document.getElementById("Next").disabled = true;
-
-                 //Used to enable registerButton
-                  document.getElementById("Register").disabled = false;
 
                   // Used to reset form.
                  document.getElementById('fn').value='';
@@ -90,26 +85,28 @@ let playersdata=[
               document.getElementById("end").disabled = false;
 
 
-          /*  STILL USING
-                let player={
+
+                 player={
                     "firstname":document.getElementById("fn"),
                     "lastname":document.getElementById("ln"),
-                     "emails":document.getElementById("Email"),
+                     "emails":document.getElementById("email"),
                      "DOB":document.getElementById("dob"),
                     "Gen":document.getElementById("gd"),
-                    "Age":document.getElementById("a")
+                    "Age":document.getElementById("a"),
+                    "TotalQuestions":0,
+                    "CorrectAnswers":0,
+                    "WrongAnswers":0,
+                    "Questions":[],
+                    "Answers":[]
                 }
 
+                  if(document.getElementById("gd").value == "male"){
+                      m_size+50;
+                    }
+                    if (document.getElementById("gd").value == "female"){
+                      f_size+50;;
+                    }
 
-
-                var fn=document.form["mathGame"]["firstname"].value;
-                var ln=document.form["mathGame"]["lastname"].value;
-                var dob=document.form["mathGame"]["dateofbirth"].value;
-                var a=document.form["mathGame"]["age"].value;
-                var gn=document.form["mathGame"]["gender"].value;*/
-
-
-                /*STILL USING
                 if(player.firstname.value =="" || player.firstname.value == null){
                     alert("First Name cannot be blank");
                     return false;
@@ -130,10 +127,14 @@ let playersdata=[
                     alert("Gender cannot be blank");
                     return false;
                 }
-                playersdata.push(player); */
+                playersdata.push(player);
+               // playersdata[cnt]=player;
+               console.log(playersdata[cnt]);
+                cnt++;
+
 
             return false;
-          } //END register
+          }
 
 //Task 4
 
@@ -143,7 +144,7 @@ let playersdata=[
                 document.getElementById('num1').value = Math.floor(Math.random() * 8) + 1;
                 document.getElementById('num2').value = Math.floor(Math.random() * 4) + 1;
 
-                document.getElementById("Accept").disabled = false;
+               document.getElementById("Accept").disabled = false;
                 document.getElementById("Next").disabled = false;
                 document.getElementById("answer").disabled = false;
 
@@ -163,9 +164,9 @@ let playersdata=[
               answer = document.getElementById('answer').value;
               num1 = document.getElementById('num1').value;
               num2 = document.getElementById('num2').value;
-
+                playersdata[cnt-1].Questions[cnt-1]=num1+"*"+num2;
+                playersdata[cnt-1].Answers[cnt-1]=answer;
               var product = num1 * num2;
-
 
               var numCheck = isNaN(answer);
 
@@ -178,13 +179,27 @@ let playersdata=[
 
                 //If checks if the answer is correct.
                 if(answer == product){
-                  //alert("Yay! You are correct.");
-                    correctAnswers ++;
-                    totalQuestions ++;
+
+                    playersdata[cnt-1].CorrectAnswers++;
+                    playersdata[cnt-1].TotalQuestions++;
                 }else{
                     //alert("I'm sorry, but you are wrong.");
-                    wrongAnswers ++;
-                    totalQuestions ++;
+                    playersdata[cnt-1].WrongAnswers++;
+                    playersdata[cnt-1].TotalQuestions++;
                 } //END IF
-
+              showall();
             }// END CheckAnswer
+
+
+        function showall(){
+            document.getElementById("showAllPlayers").value="";
+            var quest="";
+            var dd=""
+            var j=0;
+
+
+            for(let i=0; i<playersdata.length; i++){
+                document.getElementById("showAllPlayers").value+=playersdata[i].firstname.value+" "+playersdata[i].lastname.value+" "+playersdata[i].Age.value+"\n";
+
+    }
+}
