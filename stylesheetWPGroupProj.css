@@ -115,13 +115,6 @@ input[type=email]{
   opacity: 1;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:active  {-webkit-box-shadow: 0 0 0 25px #E5B1A6 inset;}
-
-input:disabled:-webkit-autofill,
-input:disabled:-webkit-autofill:active  {-webkit-box-shadow: 0 0 0 25px #8D2E2A inset;}
-
-
 input.kidInput{
   width: 20%;
   padding-top: 30px;
